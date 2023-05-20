@@ -1,22 +1,19 @@
-# Default values for dc-pyhon-app-a.
+# Default values for dc-python-app-b.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: ghcr.io/igabi/dc-python-app-a
+  repository: ghcr.io/igabi/dc-python-app-b
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-imagePullSecrets: ["github-container-registry"]
+imagePullSecrets:
+- name: github-container-registry
 nameOverride: ""
-fullnameOverride: "dc-python-app-a"
-
-env:
-- name: SERVICEB
-  value: dc-python-app-b-service
+fullnameOverride: "dc-python-app-b"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -42,7 +39,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 5000
+  port: 5001
 
 ingress:
   enabled: false

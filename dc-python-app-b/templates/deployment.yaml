@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dc-pyhon-app-a.fullname" . }}
+  name: {{ include "dc-python-app-b.fullname" . }}
   labels:
-    {{- include "dc-pyhon-app-a.labels" . | nindent 4 }}
+    {{- include "dc-python-app-b.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "dc-pyhon-app-a.selectorLabels" . | nindent 6 }}
+      {{- include "dc-python-app-b.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "dc-pyhon-app-a.selectorLabels" . | nindent 8 }}
+        {{- include "dc-python-app-b.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "dc-pyhon-app-a.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -33,10 +32,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.env }}
-          env:
-            {{- toYaml . | nindent 10 }}
-          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "dc-pyhon-app-a.name" -}}
+{{- define "dc-python-app-b.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "dc-pyhon-app-a.fullname" -}}
+{{- define "dc-python-app-b.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "dc-pyhon-app-a.chart" -}}
+{{- define "dc-python-app-b.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "dc-pyhon-app-a.labels" -}}
-helm.sh/chart: {{ include "dc-pyhon-app-a.chart" . }}
-{{ include "dc-pyhon-app-a.selectorLabels" . }}
+{{- define "dc-python-app-b.labels" -}}
+helm.sh/chart: {{ include "dc-python-app-b.chart" . }}
+{{ include "dc-python-app-b.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "dc-pyhon-app-a.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "dc-pyhon-app-a.name" . }}
+{{- define "dc-python-app-b.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "dc-python-app-b.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "dc-pyhon-app-a.serviceAccountName" -}}
+{{- define "dc-python-app-b.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "dc-pyhon-app-a.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "dc-python-app-b.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

@@ -17,7 +17,7 @@ fullnameOverride: "dc-python-app-a"
 
 env:
 - name: SERVICEB
-  value: dc-python-app-b-service
+  value: dc-python-app-b
 
 serviceAccount:
   # Specifies whether a service account should be created
