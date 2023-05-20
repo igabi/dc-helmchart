@@ -10,7 +10,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-imagePullSecrets: ["github-container-registry"]
+imagePullSecrets: 
+- name: github-container-registry
 nameOverride: ""
 fullnameOverride: "dc-python-app-a"
 
